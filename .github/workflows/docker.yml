@@ -16,5 +16,5 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t anweshanthati/movie_booking_frontend:{{ github.sha }} \
+            -t anweshanthati/movie_booking_frontend:${{ github.sha }} \
             .
