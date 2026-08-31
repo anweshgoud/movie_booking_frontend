@@ -21,12 +21,12 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t anwesh/movie_booking_frontend:${{ github.sha }} \
+            -t anweshanthati/movie_booking_frontend:${{ github.sha }} \
             .
 
       - name: Push Docker image
         run: |
-          docker push anwesh/movie_booking_frontend:${{ github.sha }}
+          docker push anweshanthati/movie_booking_frontend:${{ github.sha }}
 
       - name: Deploy to VM
         env:
