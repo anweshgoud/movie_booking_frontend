@@ -1,5 +1,4 @@
 name: Build Frontend Docker Image
-
 on:
   push:
     branches:
