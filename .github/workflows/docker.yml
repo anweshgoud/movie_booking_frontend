@@ -22,9 +22,24 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t anweshanthati/movie_booking_frontend:${{ github.sha }} \
+            -t anwesh/movie_booking_frontend:${{ github.sha }} \
             .
 
       - name: Push Docker image
         run: |
-          docker push anweshanthati/movie_booking_frontend:${{ github.sha }}
+          docker push anwesh/movie_booking_frontend:${{ github.sha }}
+
+      - name: Deploy to VM
+        env:
+          VM_HOST: ${{ secrets.VM_HOST }}
+          VM_USER: ${{ secrets.VM_USER }}
+          VM_SSH_KEY: ${{ secrets.VM_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$VM_SSH_KEY" > ~/.ssh/movie-booking-github-actions
+          chmod 600 ~/.ssh/movie-booking-github-actions
+
+          ssh -o StrictHostKeyChecking=no \
+            -i ~/.ssh/movie-booking-github-actions \
+            $VM_USER@$VM_HOST \
+            "echo 'SSH connection successful'"
